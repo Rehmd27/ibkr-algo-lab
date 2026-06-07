@@ -1,0 +1,87 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+
+# ---------- Secrets / env ----------
+.env
+.env.local
+.env.*.local
+secrets/
+*.pem
+*.key
+credentials.json
+
+# ---------- Node / Frontend ----------
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+.vite/
+*.tsbuildinfo
+.npm
+.yarn-cache/
+.pnp.*
+
+# ---------- IDE / Editor ----------
+.vscode/
+!.vscode/settings.example.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Local data ----------
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+logs/
+data/
+*.log
+
+# ---------- IBKR / IB Gateway ----------
+ib-gateway-data/
+jts.ini
+tws.xml
+
+# ---------- Backtest / research ----------
+notebooks/.ipynb_checkpoints/
+backtest-results/
+*.parquet
+
+# ---------- Models (track explicitly, not by default) ----------
+models/*.pkl
+models/*.pt
+models/*.onnx
+models/*.bin
+models/*.safetensors
+
+# ---------- Misc ----------
+.cache/
+.tmp/
+tmp/
