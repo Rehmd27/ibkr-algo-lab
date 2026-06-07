@@ -1,0 +1,109 @@
+[project]
+name = "ibkr-algo-lab-daemon"
+version = "0.1.0"
+description = "Trading daemon for ibkr-algo-lab. FastAPI + ib_async, runs strategies 24/7."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Proprietary" }
+authors = [
+    { name = "Rehmd27" },
+]
+
+# ---------- Runtime dependencies ----------
+dependencies = [
+    # IBKR API
+    "ib_async>=2.0.0",
+
+    # Web framework + ASGI server
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "websockets>=13.0",
+
+    # Data validation / settings
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+
+    # Database
+    "sqlalchemy>=2.0.0",
+    "aiosqlite>=0.20.0",
+    "alembic>=1.13.0",
+
+    # Numerical / data
+    "pandas>=2.2.0",
+    "numpy>=2.0.0",
+
+    # Logging
+    "structlog>=24.4.0",
+]
+
+# ---------- Dev dependencies (install with `pip install -e ".[dev]"`) ----------
+[project.optional-dependencies]
+dev = [
+    # Testing
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=5.0.0",
+
+    # Linting / formatting / type checking
+    "ruff>=0.7.0",
+    "mypy>=1.13.0",
+
+    # Helpful while developing
+    "ipython>=8.28.0",
+    "rich>=13.9.0",
+]
+
+# ---------- Build system ----------
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["daemon*"]
+
+# ---------- Ruff (linter + formatter) ----------
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort (import sorting)
+    "B",    # bugbear (common bugs)
+    "UP",   # pyupgrade (modern syntax)
+    "SIM",  # simplify
+    "ASYNC", # async-specific lints
+]
+ignore = [
+    "E501",  # line too long — handled by formatter
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ---------- Mypy (type checking) ----------
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+ignore_missing_imports = true  # third-party libs without type stubs
+
+# ---------- Pytest ----------
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+]
